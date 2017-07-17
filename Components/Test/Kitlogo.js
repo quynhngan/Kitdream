@@ -1,12 +1,19 @@
 import React, {Component} from 'react';
-import { StyleSheet,Text,View} from 'react-native';
+import { StyleSheet,Text,View,Image, TouchableOpacity} from 'react-native';
 export default class KitLogo extends Component{
   render(){
     return (
       <View style={styles.a}>
-<Text style = {styles.title}> Kitdream </Text>
-            </View>
+      <View style = {styles.logoContainer}>
+      <TouchableOpacity>
+      <Image
+      style = {styles.logo}
+      source ={require('../../image/chef_1.png')}
+      />
+    </TouchableOpacity>
+</View>
 
+</View>
     );
 
     }

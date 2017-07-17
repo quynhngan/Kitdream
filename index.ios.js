@@ -14,34 +14,18 @@ import {
 import Test from "./Components/Test/Test"
 import Home from "./Components/Test/Home"
 import KitLogo from "./Components/Test/Kitlogo"
+import Login from "./Components/Test/Login/Login"
 export default class KitDream extends Component {
   render() {
     return (
     <View>
-<Home/>
+
+<Login/>
     </View>
 
 
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
-AppRegistry.registerComponent('KitDream', () => Home);
+AppRegistry.registerComponent('KitDream', () => Login);
