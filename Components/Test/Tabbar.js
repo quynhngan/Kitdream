@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { View,Text, TouchableOpacity,Image ,StyleSheet} from 'react-native';
 import Login from "/Users/quynhngan/KitDream/Components/Test/Login/Login.js";
-import KitLogo from "/Users/quynhngan/KitDream/Components/Test/Home/Kitlogo.js";
-import Search from "/Users/quynhngan/KitDream/Components/Test/Search.js";
+import Recipe from "/Users/quynhngan/KitDream/Components/Test/Recipe/Recipe.js";
+import Search from "/Users/quynhngan/KitDream/Components/Test/Search/Search.js";
 import ShoppingList from "/Users/quynhngan/KitDream/Components/Test/ShoppingList.js";
 import profile from "/Users/quynhngan/KitDream/image/appicon/profile.png";
 import profile_1 from "/Users/quynhngan/KitDream/image/appicon/profile_1.png";
@@ -25,13 +25,13 @@ export default class Tabbar extends Component {
       <View style = {{flex: 1}}>
       <TabNavigator>
   <TabNavigator.Item
-    selected={this.state.selectedTab === 'Kitlogo'}
+    selected={this.state.selectedTab === 'Recipe'}
     title="Recipe"
     renderIcon={() => <Image source={recipe} style={iconStyle} />}
     renderSelectedIcon={() => <Image source={recipe_1} style={iconStyle}/>}
     selectedTitleStyle ={{color:"#FFC0CB", fontFamily:"Helvetica Neue"}}
-    onPress={() => this.setState({ selectedTab: 'Kitlogo' })}>
-    <KitLogo/>
+    onPress={() => this.setState({ selectedTab: 'Recipe' })}>
+    <Recipe/>
   </TabNavigator.Item>
   <TabNavigator.Item
     selected={this.state.selectedTab === 'Search'}
