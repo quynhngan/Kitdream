@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet,Text,View,Image } from 'react-native';
-import LoginForm from './LoginForm'
+import LoginForm from './LoginForm';
 export default class KitLogo extends Component{
   render(){
     return (

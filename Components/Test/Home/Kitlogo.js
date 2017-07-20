@@ -8,7 +8,7 @@ export default class KitLogo extends Component{
       <TouchableOpacity>
       <Image
       style = {styles.logo}
-      source ={require('../../image/chef_1.png')}
+      source ={require('/Users/quynhngan/KitDream/image/chef_1.png')}
       />
     </TouchableOpacity>
 </View>
