@@ -1,18 +1,28 @@
 import React from 'react';
 import {StackNavigator} from 'react-navigation';
-import {TabNavigator} from 'react-navigation';
-
-import Screen1 from './Screen1';
-import Screen2 from './Screen2';
+import Recipe from '/Users/quynhngan/KitDream/Components/Test/Recipe/Recipe.js';
+import RecipeDetail from '/Users/quynhngan/KitDream/Components/Test/Recipe/RecipeDetail.js';
+import SignupForm from '/Users/quynhngan/KitDream/Components/Test/Login/SignupForm.js';
+import LoginForm from '/Users/quynhngan/KitDream/Components/Test/Login/LoginForm.js'
+import ProfileDetail from '/Users/quynhngan/KitDream/Components/Test/Login/ProfileDetail.js'
  export const HomeStack = StackNavigator({
-   Screen1: {
-     screen: Screen1,
+   Recipe: {
+     screen: Recipe,
    },
-   Screen2: {
-     screen: Screen2,
-     navigationOptions: {
-       title: 'Shopping List'
-     }
+   RecipeDetail: {
+     screen: RecipeDetail,
+   },
+
    }
- });
- 
+ );
+export const ProfileStack = StackNavigator({
+  LoginForm: {
+    screen: LoginForm,
+  },
+  SignupForm:{
+    screen: SignupForm,
+  },
+  ProfileDetail: {
+  screen: ProfileDetail,
+},
+});

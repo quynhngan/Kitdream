@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { View,Text, TouchableOpacity,Image ,StyleSheet} from 'react-native';
-import Login from "/Users/quynhngan/KitDream/Components/Test/Login/Login.js";
 import Recipe from "/Users/quynhngan/KitDream/Components/Test/Recipe/Recipe.js";
 import Search from "/Users/quynhngan/KitDream/Components/Test/Search/Search.js";
 import ShoppingList from "/Users/quynhngan/KitDream/Components/Test/ShoppingList.js";
@@ -13,10 +12,12 @@ import search_1 from "/Users/quynhngan/KitDream/image/appicon/search_1.png";
 import shopping from "/Users/quynhngan/KitDream/image/appicon/shopping.png";
 import shopping_1 from "/Users/quynhngan/KitDream/image/appicon/shopping_1.png";
 import TabNavigator from 'react-native-tab-navigator';
+import Home from '/Users/quynhngan/KitDream/Components/Test/Home.js'
+import Profile from '/Users/quynhngan/KitDream/Components/Test/Profile.js'
 export default class Tabbar extends Component {
   constructor(props){
     super(props);
-    this.state = {selectedTab: 'Kitlogo'};
+    this.state = {selectedTab: 'Home'};
   }
 
   render(){
@@ -25,13 +26,13 @@ export default class Tabbar extends Component {
       <View style = {{flex: 1}}>
       <TabNavigator>
   <TabNavigator.Item
-    selected={this.state.selectedTab === 'Recipe'}
+    selected={this.state.selectedTab === 'Home'}
     title="Recipe"
     renderIcon={() => <Image source={recipe} style={iconStyle} />}
     renderSelectedIcon={() => <Image source={recipe_1} style={iconStyle}/>}
     selectedTitleStyle ={{color:"#FFC0CB", fontFamily:"Helvetica Neue"}}
-    onPress={() => this.setState({ selectedTab: 'Recipe' })}>
-    <Recipe/>
+    onPress={() => this.setState({ selectedTab: 'Home' })}>
+    <Home/>
   </TabNavigator.Item>
   <TabNavigator.Item
     selected={this.state.selectedTab === 'Search'}
@@ -54,13 +55,13 @@ export default class Tabbar extends Component {
 
   </TabNavigator.Item>
   <TabNavigator.Item
-    selected={this.state.selectedTab === 'Login'}
+    selected={this.state.selectedTab === 'Profile'}
     title="Profile"
     renderIcon={() => <Image source={profile} style={iconStyle} />}
     renderSelectedIcon={() => <Image source={profile_1} style={iconStyle} />}
       selectedTitleStyle ={{color:"#FFC0CB", fontFamily:"Helvetica Neue"}}
-    onPress={() => this.setState({ selectedTab: 'Login' })}>
-    <Login/>
+    onPress={() => this.setState({ selectedTab: 'Profile' })}>
+    <Profile/>
   </TabNavigator.Item>
 
 </TabNavigator>

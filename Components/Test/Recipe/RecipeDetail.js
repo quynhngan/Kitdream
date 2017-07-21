@@ -11,11 +11,12 @@ import food_2 from "/Users/quynhngan/KitDream/image/food_2.jpg";
 import Header from "./Header";
 const {height,width} = Dimensions.get('window');
 export default class RecipeDetail extends Component {
+  static navigationOptions = {headerTintColor:"white"}
   render() {
     const {wrapper_1,imageStyle,nameStyle,wrapper_2} = styles;
     return (
       <View>
-      <Header/>
+
       <ScrollView>
       <View style = {wrapper_1}>
 <View style={{flex:3}}>

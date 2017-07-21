@@ -4,15 +4,18 @@ import Header from "./Header";
 import food from "/Users/quynhngan/KitDream/image/food.jpg";
 import food_2 from "/Users/quynhngan/KitDream/image/food_2.jpg";
 import food_3 from "/Users/quynhngan/KitDream/image/food_3.jpg";
+
 const {height,width} = Dimensions.get('window');
 export default class Recipe extends Component{
+  static navigationOptions = {header:null}
   render(){
     const {wrapper,nameStyle,imageStyle} = styles;
 
     return(
       <ScrollView style = {{flex:1, backgroundColor:'#FFF6F7'}}>
       <Header/>
-      <TouchableOpacity onPress={()=> {this.props.navigation.navigate('RecipeDetail')}}>
+      <TouchableOpacity
+      onPress={()=>{this.props.navigation.navigate('RecipeDetail')}}>
       <View style = {wrapper}>
 <View style={{flex:3}}>
 <Image source ={food_2} style={imageStyle}/>
@@ -39,7 +42,6 @@ export default class Recipe extends Component{
 <Text style ={nameStyle}> NAME </Text>
 </View>
       </View>
-
       </ScrollView>
     );
   }

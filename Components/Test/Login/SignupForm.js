@@ -1,10 +1,8 @@
-/* @flow */
-
 import React, { Component } from 'react';
 import {  View,  Text,  StyleSheet,TextInput, TouchableOpacity,Image} from 'react-native';
 
 export default class LoginForm extends Component {
-static navigationOptions = {header:null}
+  static navigationOptions = {header:null}
   render() {
     return (
       <View style={styles.a}>
@@ -22,18 +20,19 @@ static navigationOptions = {header:null}
       placeholderTextColor="#FFFFFF"
       />
       <TextInput style = { styles.input} type ='password'
+      placeholder="Name"
+      placeholderTextColor="#FFFFFF"
+      />
+      <TextInput style = { styles.input} type ='password'
       placeholder="Password"
       placeholderTextColor="#FFFFFF"
       />
-      <TouchableOpacity style = {styles.buttonContainer}
-      onPress={()=>{this.props.navigation.navigate('ProfileDetail')}}
-      >
-      <Text style ={styles.buttonText}> Login </Text>
+      <TouchableOpacity style = {styles.buttonContainer}>
+      <Text style ={styles.buttonText}> Sign up </Text>
       </TouchableOpacity>
-      <Text style ={styles.fontText_1}> Dont have an account? </Text>
-      <TouchableOpacity
-      onPress={()=>{this.props.navigation.navigate('SignupForm')}}>
-      <Text style ={styles.fontText_2}>Sign up</Text>
+      <Text style ={styles.fontText_1}> Already have an account? </Text>
+      <TouchableOpacity onPress={()=>{this.props.navigation.goBack()}}>
+      <Text style ={styles.fontText_2}>Login here</Text>
       </TouchableOpacity>
       </View>
       </View>
@@ -85,24 +84,24 @@ paddingBottom: 200
     fontFamily: 'Helvetica Neue',
     textAlign:'center',
 
-  },  a: {
-      flex:1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#FFFFFF',
-      paddingTop: 100
-    },
-    logo: {
-      width: 70,
-      height: 70,
+  },a: {
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    paddingTop: 100
+  },
+  logo: {
+    width: 70,
+    height: 70,
 
-    },
-    logoContainer: {
-      alignItems :'center',
-      flexGrow: 1,
-      justifyContent: 'center',
-      marginBottom: 20,
-    },
+  },
+  logoContainer: {
+    alignItems :'center',
+    flexGrow: 1,
+    justifyContent: 'center',
+    marginBottom: 20,
+  }
 }
 
 );

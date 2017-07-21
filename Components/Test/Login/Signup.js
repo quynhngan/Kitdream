@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet,Text,View,Image } from 'react-native';
-import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
 export default class KitLogo extends Component{
   render(){
     return (
@@ -13,7 +13,7 @@ export default class KitLogo extends Component{
 
 </View>
 <View style = { styles.formContainer}>
-<LoginForm/>
+<SignupForm/>
 </View>
 </View>
     );
