@@ -21,7 +21,7 @@ static navigationOptions = {header:null}
       placeholder="Email"
       placeholderTextColor="#FFFFFF"
       />
-      <TextInput style = { styles.input} type ='password'
+      <TextInput style = { styles.input} type = 'password'
       placeholder="Password"
       placeholderTextColor="#FFFFFF"
       />
@@ -30,7 +30,7 @@ static navigationOptions = {header:null}
       >
       <Text style ={styles.buttonText}> Login </Text>
       </TouchableOpacity>
-      <Text style ={styles.fontText_1}> Dont have an account? </Text>
+      <Text style ={styles.fontText_1}>{"Don't have an account? "} </Text>
       <TouchableOpacity
       onPress={()=>{this.props.navigation.navigate('SignupForm')}}>
       <Text style ={styles.fontText_2}>Sign up</Text>

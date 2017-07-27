@@ -1,31 +1,37 @@
-import React, { Component } from 'react';
-import { View,Text, StyleSheet,ScrollView, ListView } from 'react-native';
+/* @flow */
 
-export default class DemoListView extends Component {
+import React, { Component } from 'react';
+import { View,Text, StyleSheet,ScrollView, ListView,Dimensions } from 'react-native';
+import chef_3 from "/Users/quynhngan/KitDream/image/chef_3.png";
+const { height} = Dimensions.get ('window');
+export default class ShoppingList extends Component {
   constructor (props){
     super(props);
-    data = ['item1', 'item2','item3'];
-    const ds = new ListView.DataSource({rowHasChanged: (r1,r2)=>r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(data)
+      dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=>r1 !== r2})
+
     }
   }
-  _renderRow(data){
-    return(
-      <View>
-      <Text style ={styles.title}>{data}</Text>
-      </View>
-    );
-  }
+
   render() {
     return (
+      <View>
       <View style={styles.container}>
       <ListView
       dataSource={this.state.dataSource}
-      renderRow={this._renderRow.bind(this)}
+      renderRow={()=>
+        <Text> abc </Text>
+      }
       />
       </View>
+      </View>
     );
+  }
+  componentDidMount(){
+    var array = ["i1","item2","item3"]
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(array),
+    });
   }
 }
 
@@ -37,10 +43,15 @@ const styles = StyleSheet.create({
     paddingTop:30,
 
   },
-  title: {
-    color: 'black',
-    fontSize: 20,
-    fontWeight : 'bold',
-    fontFamily : 'Noteworthy',
-  }
+  iconStyle:{
+    width: 32,
+    height: 32,
+  },
+  wrapper: {
+    height: height/10,
+    backgroundColor:"#FFC0CB",
+      justifyContent: 'center',
+        alignItems: 'center',
+  paddingTop: 20,
+  },
 });

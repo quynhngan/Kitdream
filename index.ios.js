@@ -1,3 +1,4 @@
+
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -15,15 +16,17 @@ import {
 import Test from "./Components/Test/Test"
 import Home from "./Components/Test/Home"
 import KitLogo from "./Components/Test/Home/Kitlogo"
-import DemoListView from "./Components/Test/DemoListView"
 import Tabbar from "./Components/Test/Tabbar"
 import Recipe from "./Components/Test/Recipe/Recipe"
+import Search from "./Components/Test/Search/Search"
+import ABC from "./Components/Test/ABC"
+
 export default class KitDream extends Component {
   render() {
     return (
     <View>
 <Tabbar/>
-
+<ABC/>
     </View>
 
 

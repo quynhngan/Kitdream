@@ -6,7 +6,7 @@ import {
   Text,
   StyleSheet,Dimensions,Image,ScrollView
 } from 'react-native';
-import food_2 from "/Users/quynhngan/KitDream/image/food_2.jpg";
+import food from "/Users/quynhngan/KitDream/image/food.jpg";
 
 import Header from "./Header";
 const {height,width} = Dimensions.get('window');
@@ -20,7 +20,7 @@ export default class RecipeDetail extends Component {
       <ScrollView>
       <View style = {wrapper_1}>
 <View style={{flex:3}}>
-<Image source ={food_2} style={imageStyle}/>
+<Image source ={food} style={imageStyle}/>
 </View>
       </View>
       <Text style = {nameStyle}> Name </Text>
