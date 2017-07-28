@@ -19,14 +19,13 @@ import KitLogo from "./Components/Test/Home/Kitlogo"
 import Tabbar from "./Components/Test/Tabbar"
 import Recipe from "./Components/Test/Recipe/Recipe"
 import Search from "./Components/Test/Search/Search"
-import ABC from "./Components/Test/ABC"
+import HomeScreen from "./Components/Test/HomeScreen"
 
 export default class KitDream extends Component {
   render() {
     return (
     <View>
 <Tabbar/>
-<ABC/>
     </View>
 
 

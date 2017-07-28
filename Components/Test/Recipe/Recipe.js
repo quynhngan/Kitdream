@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import{ View, ScrollView, Text, Image, StyleSheet, Dimensions, TouchableOpacity, ActivityIndicator} from 'react-native';
+import{ View, ScrollView, Text, Image, StyleSheet, Dimensions, TouchableOpacity, ActivityIndicator, TouchableHighlight} from 'react-native';
 import Header from "./Header";
 import food from "/Users/quynhngan/KitDream/image/food.jpg";
 import food_2 from "/Users/quynhngan/KitDream/image/food_2.jpg";
@@ -47,21 +47,21 @@ export default class Recipe extends Component{
       {this.state.recipes.map((recipe) => {
         return (
           <View>
-          <TouchableOpacity
-          onPress={()=>{this.props.navigation.navigate('RecipeDetail')}}>
+
 
           <View style = {wrapper}>
             <View style={{flex:3}}>
-
+            <TouchableOpacity
+            key ={recipe.id}
+            onPress={()=>{this.props.navigation.navigate('RecipeDetail',{id:recipe.id})}}>
             <Image source ={{url:recipe.image_url}} style={imageStyle}/>
+            </TouchableOpacity>
             </View>
-
-
             <View style = {{flex:1}}>
             <Text style ={nameStyle}> {recipe.name} </Text>
             </View>
           </View>
-          </TouchableOpacity>
+
           </View>
         )
       })}
