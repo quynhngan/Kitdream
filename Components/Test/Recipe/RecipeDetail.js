@@ -4,10 +4,14 @@ import {
 import food from "/Users/quynhngan/KitDream/image/food.jpg";
 import Recipe from "/Users/quynhngan/KitDream/Components/Test/Recipe/Recipe.js"
 import Header from "/Users/quynhngan/KitDream/Components/Test/Recipe/Header.js";
+import global from '/Users/quynhngan/KitDream/Components/Test/global.js'
 const {height,width} = Dimensions.get('window');
 export default class RecipeDetail extends Component {
   static navigationOptions = {headerTintColor:"white",headerStyle: {
            backgroundColor:"#FFC0CB"} }
+  addThisIngredientToShopping(recipe){
+    global.addIngredientToShopping(recipe);
+  }
 
 
   render() {
@@ -19,36 +23,36 @@ export default class RecipeDetail extends Component {
       <ScrollView style={{backgroundColor:'#ffffff'}}>
       <View style = {wrapper_1}>
 <View style={{flex:3}}>
-<Image source ={{url:this.props.navigation.state.params.r.image_url}} style={imageStyle}/>
+<Image source ={{url:this.props.navigation.state.params.recipes.image_url}} style={imageStyle}/>
 </View>
       </View>
-<Text style = {nameStyle}>{this.props.navigation.state.params.r.name }</Text>
+<Text style = {nameStyle}>{this.props.navigation.state.params.recipes.name }</Text>
 <View style = {{justifyContent:'space-between',flexDirection:'row'}}>
 <View style={wrapper_2}>
 <Text style={textStyle}> Category: </Text>
-<Text style = {{fontSize:16}}> {this.props.navigation.state.params.r.category}</Text>
+<Text style = {{fontSize:16}}> {this.props.navigation.state.params.recipes.category}</Text>
 </View>
 <View style ={wrapper_2} >
 <Text style={textStyle}> Difficuty: </Text>
-<Text style = {{fontSize:16}}> {this.props.navigation.state.params.r.difficuty} </Text>
+<Text style = {{fontSize:16}}> {this.props.navigation.state.params.recipes.difficuty} </Text>
 </View>
 </View>
 <View style = {{justifyContent:'space-between',flexDirection:'row'}}>
 <View style={wrapper_2}>
 <Text style={textStyle}> Pre-Time: </Text>
-<Text style = {{fontSize:16}}> {this.props.navigation.state.params.r.preparation_time}</Text>
+<Text style = {{fontSize:16}}> {this.props.navigation.state.params.recipes.preparation_time}</Text>
 <Text style={{fontSize:16}}>min</Text>
 </View>
 <View style ={wrapper_2} >
 <Text style={textStyle}> Serving: </Text>
-<Text style = {{fontSize:16}}> {this.props.navigation.state.params.r.number_of_servings} </Text>
+<Text style = {{fontSize:16}}> {this.props.navigation.state.params.recipes.number_of_servings} </Text>
 </View>
 </View>
 <View style ={wrapper_2} >
 <Text style={textStyle}> Ingredients </Text>
 </View>
 <View>
-{this.props.navigation.state.params.r.ingredients.map((ingredient) => {
+{this.props.navigation.state.params.recipes.ingredients.map((ingredient) => {
   return (
     <View style={_wrapper}>
     <Text>- {ingredient.name}:</Text>
@@ -58,14 +62,16 @@ export default class RecipeDetail extends Component {
   );
 })}
 </View>
-  <TouchableOpacity style = {buttonContainer}>
+  <TouchableOpacity style = {buttonContainer}
+  onPress = { this.addThisIngredientToShopping.bind(this, this.props.navigation.state.params.recipes)}
+  >
 <Text style ={button}> Add to Shopping List </Text>
 </TouchableOpacity>
 <View style ={wrapper_2}>
 <Text style={textStyle}> How-to </Text>
 </View>
 <View>
-<Text style={{margin:10}}>{this.props.navigation.state.params.r.description}</Text>
+<Text style={{margin:10}}>{this.props.navigation.state.params.recipes.description}</Text>
 </View>
 </ScrollView>
 

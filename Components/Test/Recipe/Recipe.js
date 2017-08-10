@@ -13,7 +13,6 @@ export default class Recipe extends Component{
     super(props);
     this.state = {
       isLoading: true
-      cart:[]
     }
   }
   componentDidMount() {
@@ -40,8 +39,6 @@ export default class Recipe extends Component{
     }
 
     const {wrapper,nameStyle,imageStyle,_wrapper,iconStyle,textStyle} = styles;
-    const {cart} =this.state
-
     return(
       <ScrollView style = {{flex:1, backgroundColor:'#FFF6F7'}}>
       <View style={{height:height/10}}>
@@ -55,19 +52,18 @@ export default class Recipe extends Component{
         </View>
       </View>
 
-      {this.state.recipes.map((r) => {
+      {this.state.recipes.map((recipes) => {
         return (
 
-          <View style= {wrapper} key= {r.id}>
+          <View style= {wrapper} key= {recipes.id}>
             <View style={{flex:3}}>
             <TouchableOpacity
-             key = {r.id}
-            onPress={()=>{this.props.navigation.navigate('RecipeDetail',{r})}}>
-            <Image source ={{url:r.image_url}} style={imageStyle}/>
+            onPress={()=>{this.props.navigation.navigate('RecipeDetail',{recipes})}}>
+            <Image source ={{url:recipes.image_url}} style={imageStyle}/>
             </TouchableOpacity>
             </View>
             <View style = {{flex:1}}>
-            <Text style ={nameStyle}> {r.name} </Text>
+            <Text style ={nameStyle}> {recipes.name} </Text>
             </View>
           </View>
 

@@ -15,11 +15,14 @@ export default class ShoppingList extends Component {
         </View>
       </View>
       <ScrollView>
-    <View style= {_wrapper}>
-  <Text
-  style ={textStyle}
-  > item1 </Text>
-      </View>
+      {this.props.cart.map((recipe) => {
+        return (
+          <View style= {_wrapper}>
+            <Text style ={textStyle}>{recipe.name}</Text>
+          </View>
+        )
+      })}
+
       </ScrollView>
       </View>
     );

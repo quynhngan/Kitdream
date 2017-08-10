@@ -15,15 +15,34 @@ import TabNavigator from 'react-native-tab-navigator';
 import Home from '/Users/quynhngan/KitDream/Components/Test/Home.js'
 import Profile from '/Users/quynhngan/KitDream/Components/Test/Profile.js'
 import Filter from '/Users/quynhngan/KitDream/Components/Test/Search/Filter.js'
+import global from '/Users/quynhngan/KitDream/Components/Test/global.js'
 export default class Tabbar extends Component {
   constructor(props){
     super(props);
     this.state = {
       selectedTab: 'Home',
       cart:[]
-
-
   };
+  global.addIngredientToShopping = this.addIngredientToShopping.bind(this);
+  }
+
+  componentDidMount() {
+    return fetch('http://localhost:4000/recipes')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          recipes: responseJson
+        }, function() {
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  addIngredientToShopping(recipes){
+    this.setState({cart: this.state.cart.concat(recipes)})
+
   }
   render(){
     const {iconStyle} = styles;
@@ -38,7 +57,7 @@ export default class Tabbar extends Component {
     renderSelectedIcon={() => <Image source={recipe_1} style={iconStyle}/>}
     selectedTitleStyle ={{color:"#FFC0CB", fontFamily:"Helvetica Neue"}}
     onPress={() => this.setState({ selectedTab: 'Home' })}>
-    <Home/>
+    <Home />
   </TabNavigator.Item>
   <TabNavigator.Item
     selected={selectedTab === 'Search'}
@@ -55,11 +74,11 @@ export default class Tabbar extends Component {
     title="Shopping"
     renderIcon={() => <Image source={shopping} style={iconStyle} />}
     renderSelectedIcon={() => <Image source={shopping_1} style={iconStyle} />}
-    badgeText='1'
+    badgeText={cart.length}
       selectedTitleStyle ={{color:"#FFC0CB", fontFamily:"Helvetica Neue"}}
     onPress={() => this.setState({ selectedTab: 'ShoppingList' })}>
 
-    <ShoppingList/>
+    <ShoppingList cart = {cart}/>
 
   </TabNavigator.Item>
   <TabNavigator.Item
