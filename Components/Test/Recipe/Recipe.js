@@ -1,10 +1,11 @@
+
 import React,{Component} from 'react';
 import{ View, ScrollView, Text, Image, StyleSheet, Dimensions, TouchableOpacity, ActivityIndicator, TouchableHighlight} from 'react-native';
 import Header from "./Header";
 import food from "/Users/quynhngan/KitDream/image/food.jpg";
 import food_2 from "/Users/quynhngan/KitDream/image/food_2.jpg";
 import food_3 from "/Users/quynhngan/KitDream/image/food_3.jpg";
-
+import chef_3 from "/Users/quynhngan/KitDream/image/chef_3.png";
 const {height,width} = Dimensions.get('window');
 export default class Recipe extends Component{
   static navigationOptions = {header:null}
@@ -12,6 +13,7 @@ export default class Recipe extends Component{
     super(props);
     this.state = {
       isLoading: true
+      cart:[]
     }
   }
   componentDidMount() {
@@ -22,7 +24,6 @@ export default class Recipe extends Component{
           isLoading: false,
           recipes: responseJson
         }, function() {
-          // do something with new stat
         });
       })
       .catch((error) => {
@@ -38,31 +39,38 @@ export default class Recipe extends Component{
       );
     }
 
-    const {wrapper,nameStyle,imageStyle} = styles;
+    const {wrapper,nameStyle,imageStyle,_wrapper,iconStyle,textStyle} = styles;
+    const {cart} =this.state
 
     return(
       <ScrollView style = {{flex:1, backgroundColor:'#FFF6F7'}}>
-      <Header/>
+      <View style={{height:height/10}}>
+        <View style = {_wrapper}>
+        <Image source ={chef_3} style = {iconStyle}/>
+        <TouchableOpacity
+       onPress={()=>{this.props.navigation.navigate('FilterRecipe')}}
+        >
+        <Text style = {textStyle}> Filter </Text>
+        </TouchableOpacity>
+        </View>
+      </View>
 
-      {this.state.recipes.map((recipe) => {
+      {this.state.recipes.map((r) => {
         return (
-          <View>
 
-
-          <View style = {wrapper}>
+          <View style= {wrapper} key= {r.id}>
             <View style={{flex:3}}>
             <TouchableOpacity
-            key ={recipe.id}
-            onPress={()=>{this.props.navigation.navigate('RecipeDetail',{id:recipe.id})}}>
-            <Image source ={{url:recipe.image_url}} style={imageStyle}/>
+             key = {r.id}
+            onPress={()=>{this.props.navigation.navigate('RecipeDetail',{r})}}>
+            <Image source ={{url:r.image_url}} style={imageStyle}/>
             </TouchableOpacity>
             </View>
             <View style = {{flex:1}}>
-            <Text style ={nameStyle}> {recipe.name} </Text>
+            <Text style ={nameStyle}> {r.name} </Text>
             </View>
           </View>
 
-          </View>
         )
       })}
       </ScrollView>
@@ -90,6 +98,25 @@ const styles = StyleSheet.create({
   imageStyle: {
     height: imageHeight,
     width: imageWidth,
-  }
+  },
+   _wrapper: {
+      height: height/10,
+      backgroundColor:"#FFC0CB",
+      alignItems: 'center',
+      paddingTop: 20,
+      justifyContent:'center',
+    flexDirection: 'row',
+    },
+    iconStyle:{
+      width: 32,
+      height: 32,
+      alignItems: 'center',
+      marginLeft: width/2-25,
+    },
+    textStyle: {
+      marginLeft: 120,
+      color: 'white',
+      fontSize: 15
+    }
 
 });

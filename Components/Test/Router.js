@@ -5,6 +5,9 @@ import RecipeDetail from '/Users/quynhngan/KitDream/Components/Test/Recipe/Recip
 import SignupForm from '/Users/quynhngan/KitDream/Components/Test/Login/SignupForm.js';
 import LoginForm from '/Users/quynhngan/KitDream/Components/Test/Login/LoginForm.js'
 import ProfileDetail from '/Users/quynhngan/KitDream/Components/Test/Login/ProfileDetail.js'
+import Search from '/Users/quynhngan/KitDream/Components/Test/Search/Search.js';
+import FilterRecipe from '/Users/quynhngan/KitDream/Components/Test/Recipe/FilterRecipe.js';
+
  export const HomeStack = StackNavigator({
    Recipe: {
      screen: Recipe,
@@ -12,7 +15,9 @@ import ProfileDetail from '/Users/quynhngan/KitDream/Components/Test/Login/Profi
    RecipeDetail: {
      screen: RecipeDetail,
    },
-
+   FilterRecipe:{
+     screen: FilterRecipe,
+   }
    }
  );
 export const ProfileStack = StackNavigator({
@@ -25,4 +30,12 @@ export const ProfileStack = StackNavigator({
   ProfileDetail: {
   screen: ProfileDetail,
 },
+});
+export const FilterStack = StackNavigator({
+  Search: {
+    screen: Search,
+  },
+  Recipe:{
+    screen: Recipe,
+  },
 });

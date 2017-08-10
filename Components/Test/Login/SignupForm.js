@@ -1,8 +1,62 @@
 import React, { Component } from 'react';
-import {  View,  Text,  StyleSheet,TextInput, TouchableOpacity,Image} from 'react-native';
+import {  View,  Text,  StyleSheet,TextInput, TouchableOpacity,Image, Alert} from 'react-native';
 
 export default class LoginForm extends Component {
   static navigationOptions = {header:null}
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      e:"",
+      pass:"",
+      name:"",
+    }
+  }
+  register() {
+    return fetch('http://localhost:4000/users/sign_up', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ user: {
+      email: this.state.e,
+      full_name: this.state.name,
+      password: this.state.pass,
+    }})
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {
+    this.alertSusscess()
+      this.props.navigation.navigate('LoginForm')
+
+    }
+  )
+  .catch((error) => {
+  this.alertError()
+});
+
+  }
+  alertError(){
+    Alert.alert(
+      'Notice',
+      'email adress already in use by another account',
+      [
+        {text: 'OK',onPress:()=>console.log('Ask me later pressed')}
+      ],
+      {cancelable: false}
+    );
+  }
+  alertSusscess(){
+    Alert.alert(
+      'Notice',
+      'Susscessfully!',
+      [
+        {text: 'OK',onPress:()=>console.log('Ask me later pressed')}
+      ],
+      {cancelable: false}
+    );
+  }
   render() {
     return (
       <View style={styles.a}>
@@ -16,18 +70,32 @@ export default class LoginForm extends Component {
 <View style = { styles.formContainer}>
       <View style={styles.container}>
       <TextInput style = { styles.input}
+      onChangeText={(e) => this.setState({e})}
+       value={this.state.e}
       placeholder="Email"
       placeholderTextColor="#FFFFFF"
+      autoCorrect={false}
+      autoCapitalize='none'
+      keyboardType= 'email-address'
       />
-      <TextInput style = { styles.input} type ='password'
+      <TextInput style = { styles.input}
+      onChangeText={(name) => this.setState({name})}
+       value={this.state.name}
       placeholder="Name"
       placeholderTextColor="#FFFFFF"
+      autoCorrect={false}
+      autoCapitalize='none'
       />
       <TextInput style = { styles.input} type ='password'
+      onChangeText={(pass) => this.setState({pass})}
+       value={this.state.pass}
+       secureTextEntry
       placeholder="Password"
       placeholderTextColor="#FFFFFF"
       />
-      <TouchableOpacity style = {styles.buttonContainer}>
+      <TouchableOpacity style = {styles.buttonContainer}
+      onPress={this.register.bind(this)}
+      >
       <Text style ={styles.buttonText}> Sign up </Text>
       </TouchableOpacity>
       <Text style ={styles.fontText_1}> Already have an account? </Text>

@@ -2,45 +2,70 @@ import React, { Component } from 'react';
 import {
   View, Text, StyleSheet, Dimensions, Image, ScrollView, ActivityIndicator,TouchableOpacity} from 'react-native';
 import food from "/Users/quynhngan/KitDream/image/food.jpg";
-
+import Recipe from "/Users/quynhngan/KitDream/Components/Test/Recipe/Recipe.js"
 import Header from "/Users/quynhngan/KitDream/Components/Test/Recipe/Header.js";
 const {height,width} = Dimensions.get('window');
 export default class RecipeDetail extends Component {
-  static navigationOptions = {headerTintColor:"white"}
+  static navigationOptions = {headerTintColor:"white",headerStyle: {
+           backgroundColor:"#FFC0CB"} }
 
 
   render() {
 
 
-    const {wrapper_1,imageStyle,nameStyle,wrapper_2,textStyle,button, buttonContainer} = styles;
+    const {wrapper_1,imageStyle,nameStyle,wrapper_2,textStyle,button, buttonContainer,_wrapper} = styles;
     return (
 
-      <ScrollView>
+      <ScrollView style={{backgroundColor:'#ffffff'}}>
       <View style = {wrapper_1}>
 <View style={{flex:3}}>
-<Image source ={food} style={imageStyle}/>
+<Image source ={{url:this.props.navigation.state.params.r.image_url}} style={imageStyle}/>
 </View>
       </View>
-<Text style = {nameStyle}> Name </Text>
+<Text style = {nameStyle}>{this.props.navigation.state.params.r.name }</Text>
+<View style = {{justifyContent:'space-between',flexDirection:'row'}}>
+<View style={wrapper_2}>
+<Text style={textStyle}> Category: </Text>
+<Text style = {{fontSize:16}}> {this.props.navigation.state.params.r.category}</Text>
+</View>
 <View style ={wrapper_2} >
-<Text style={textStyle}> Difficuty: Easy </Text>
-<Text style={textStyle}> Pre-Time: 30 min </Text>
+<Text style={textStyle}> Difficuty: </Text>
+<Text style = {{fontSize:16}}> {this.props.navigation.state.params.r.difficuty} </Text>
+</View>
+</View>
+<View style = {{justifyContent:'space-between',flexDirection:'row'}}>
+<View style={wrapper_2}>
+<Text style={textStyle}> Pre-Time: </Text>
+<Text style = {{fontSize:16}}> {this.props.navigation.state.params.r.preparation_time}</Text>
+<Text style={{fontSize:16}}>min</Text>
+</View>
+<View style ={wrapper_2} >
+<Text style={textStyle}> Serving: </Text>
+<Text style = {{fontSize:16}}> {this.props.navigation.state.params.r.number_of_servings} </Text>
+</View>
 </View>
 <View style ={wrapper_2} >
 <Text style={textStyle}> Ingredients </Text>
-<Text style={textStyle}> Servings  </Text>
 </View>
 <View>
-<Text> - </Text>
-<Text> - </Text>
-<Text> - </Text>
-<Text> - </Text>
+{this.props.navigation.state.params.r.ingredients.map((ingredient) => {
+  return (
+    <View style={_wrapper}>
+    <Text>- {ingredient.name}:</Text>
+    <Text style={{paddingHorizontal:5}}>{ingredient.number_of_units}</Text>
+    <Text >{ingredient.units_of_measurement}</Text>
+    </View>
+  );
+})}
 </View>
   <TouchableOpacity style = {buttonContainer}>
 <Text style ={button}> Add to Shopping List </Text>
 </TouchableOpacity>
 <View style ={wrapper_2}>
 <Text style={textStyle}> How-to </Text>
+</View>
+<View>
+<Text style={{margin:10}}>{this.props.navigation.state.params.r.description}</Text>
 </View>
 </ScrollView>
 
@@ -58,22 +83,27 @@ const styles = StyleSheet.create({
   imageStyle: {
     height: imageHeight,
     width: imageWidth,
-  },  nameStyle: {
-      paddingTop: 15,
+  },
+   nameStyle: {
+      paddingTop: 20,
       paddingBottom: 30,
-      fontSize:16,
+      fontSize:18,
       color: '#95989A',
       textAlign:'center',
-
-
 
     },
     wrapper_2: {
       margin: 10,
-      justifyContent:'space-between',
       flexDirection:'row',
 
     },
+    _wrapper:{
+      margin: 10,
+      flexDirection:'row',
+      justifyContent:'flex-start',
+    },
+
+
     textStyle: {
       fontSize:16,
       color: '#95989A',

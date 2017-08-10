@@ -12,19 +12,18 @@ import {
   Text,
   View
 } from 'react-native';
-
-import Test from "./Components/Test/Test"
 import Home from "./Components/Test/Home"
-import KitLogo from "./Components/Test/Home/Kitlogo"
+import ProfileDetail from "/Users/quynhngan/KitDream/Components/Test/Login/ProfileDetail.js"
 import Tabbar from "./Components/Test/Tabbar"
 import Recipe from "./Components/Test/Recipe/Recipe"
 import Search from "./Components/Test/Search/Search"
 import HomeScreen from "./Components/Test/HomeScreen"
-
+import LoginForm from "./Components/Test/Login/LoginForm"
 export default class KitDream extends Component {
   render() {
     return (
     <View>
+<ProfileDetail/>
 <Tabbar/>
     </View>
 

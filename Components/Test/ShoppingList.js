@@ -1,52 +1,31 @@
-/* @flow */
-
 import React, { Component } from 'react';
-import { View,Text, StyleSheet,ScrollView, ListView,Dimensions } from 'react-native';
+import { View,Text, StyleSheet,ScrollView,Dimensions,Image, TouchableOpacity, Alert} from 'react-native';
 import chef_3 from "/Users/quynhngan/KitDream/image/chef_3.png";
+import CheckBox from 'react-native-check-box';
 const { height} = Dimensions.get ('window');
 export default class ShoppingList extends Component {
-  constructor (props){
-    super(props);
-    this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged: (r1,r2)=>r1 !== r2})
-
-    }
-  }
 
   render() {
+    const {wrapper,iconStyle,_wrapper,textStyle,_textStyle} = styles;
     return (
       <View>
-      <View style={styles.container}>
-      <ListView
-      dataSource={this.state.dataSource}
-      renderRow={()=>
-        <Text> abc </Text>
-      }
-      />
+      <View style={{height:height/10}}>
+        <View style = {wrapper}>
+        <Image source ={chef_3} style = {iconStyle}/>
+        </View>
       </View>
+      <ScrollView>
+    <View style= {_wrapper}>
+  <Text
+  style ={textStyle}
+  > item1 </Text>
+      </View>
+      </ScrollView>
       </View>
     );
   }
-  componentDidMount(){
-    var array = ["i1","item2","item3"]
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(array),
-    });
-  }
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex:1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop:30,
-
-  },
-  iconStyle:{
-    width: 32,
-    height: 32,
-  },
   wrapper: {
     height: height/10,
     backgroundColor:"#FFC0CB",
@@ -54,4 +33,26 @@ const styles = StyleSheet.create({
         alignItems: 'center',
   paddingTop: 20,
   },
+  iconStyle:{
+    width: 32,
+    height: 32,
+},
+_wrapper:{
+  height: height/12,
+  borderBottomWidth:1,
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderColor: "#95989A"
+},
+textStyle: {
+  fontSize:14,
+  color: '#95989A',
+  justifyContent:'center',
+},
+_textStyle: {
+  fontSize:14,
+  color: 'white',
+  justifyContent:'center',
+}
+
 });

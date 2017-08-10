@@ -1,24 +1,23 @@
 import React,{Component} from 'react';
-import{ View, Text,TouchableOpacity,Dimensions,StyleSheet,Image,TouchableHighlight} from 'react-native';
+import{ View, Text,TouchableOpacity,Dimensions,StyleSheet,Image,TouchableHighlight,Button} from 'react-native';
 import drink from "/Users/quynhngan/KitDream/image/search_icon/drink.png";
 import main from "/Users/quynhngan/KitDream/image/search_icon/main.png";
 import dessert from "/Users/quynhngan/KitDream/image/search_icon/dessert.png";
 import star from "/Users/quynhngan/KitDream/image/search_icon/star.png";
 import hard from "/Users/quynhngan/KitDream/image/search_icon/hard.png";
 import medium from "/Users/quynhngan/KitDream/image/search_icon/medium.png";
-import Home from "/Users/quynhngan/KitDream/Components/Test/Home.js"
-import HeaderSearch from "./HeaderSearch";
 const {height,width} = Dimensions.get('window');
-export default class Search extends Component{
-static navigationOptions = {header:null}
+export default class FilterRecipe extends Component{
+static navigationOptions = {headerTintColor:"white" ,title: 'Filter',headerStyle: {
+         backgroundColor:"#FFC0CB"
+       }}
   setCategory(name) {
     this.setState({category: name})
   }
   render(){
-    const {wrapper,textTitle,imageStyle,text,_imageStyle,textDone,_textTitle} = styles;
+    const {wrapper,textTitle,imageStyle,text,_imageStyle,textDone,_textTitle,container} = styles;
     return(
-      <View style = {{ flex: 1}}>
-<HeaderSearch/>
+      <View style = {container}>
 <View>
 <Text style = {_textTitle}> Category </Text>
 <View style = {wrapper}>
@@ -82,6 +81,7 @@ onPress = {() => this.setCategory('main')}
 </View>
 </View>
 <TouchableOpacity
+onPress={()=>{this.props.navigation.goBack()}}
 >
 <Text style={textDone}> Done </Text>
 
@@ -142,4 +142,8 @@ _textTitle: {
   color: '#5D5D5D',
   marginLeft: 10,
 },
+container:{
+  backgroundColor: '#FFFFFF',
+  flex: 1,
+}
 });

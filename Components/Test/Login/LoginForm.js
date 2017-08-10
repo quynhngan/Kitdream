@@ -1,10 +1,52 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import {  View,  Text,  StyleSheet,TextInput, TouchableOpacity,Image} from 'react-native';
+import {  View,  Text,  StyleSheet,TextInput, TouchableOpacity,Image, Alert} from 'react-native';
 
 export default class LoginForm extends Component {
 static navigationOptions = {header:null}
+constructor(props) {
+  super(props);
+  this.state = {
+    isLoading: true,
+    e:"",
+    pass:"",
+  }
+}
+signIn() {
+  return fetch('http://localhost:4000/users/sign_in', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ user: {
+    email: this.state.e,
+    password: this.state.pass,
+  }})
+})
+.then((response) => response.json())
+.then((responseJson) => {
+    if (responseJson.errors) {
+      this.alertError()
+    } else {
+      this.props.navigation.navigate('ProfileDetail')
+    }
+
+  }
+)
+
+}
+alertError(){
+  Alert.alert(
+    'Notice',
+    'email or password is incorrect',
+    [
+      {text: 'OK',onPress:()=>console.log('Ask me later pressed')}
+    ],
+    {cancelable: false}
+  );
+}
   render() {
     return (
       <View style={styles.a}>
@@ -18,15 +60,23 @@ static navigationOptions = {header:null}
 <View style = { styles.formContainer}>
       <View style={styles.container}>
       <TextInput style = { styles.input}
+      onChangeText={(e) => this.setState({e})}
+      value={this.state.e}
       placeholder="Email"
       placeholderTextColor="#FFFFFF"
+      autoCorrect={false}
+      autoCapitalize='none'
+      keyboardType= 'email-address'
       />
-      <TextInput style = { styles.input} type = 'password'
+      <TextInput style = { styles.input}
+      onChangeText={(pass) => this.setState({pass})}
+       value={this.state.pass}
       placeholder="Password"
+      secureTextEntry
       placeholderTextColor="#FFFFFF"
       />
       <TouchableOpacity style = {styles.buttonContainer}
-      onPress={()=>{this.props.navigation.navigate('ProfileDetail')}}
+      onPress={this.signIn.bind(this)}
       >
       <Text style ={styles.buttonText}> Login </Text>
       </TouchableOpacity>
@@ -52,7 +102,7 @@ paddingBottom: 200
     backgroundColor:'#E1E1E1',
     marginBottom: 10,
     color: '#FFFFFF',
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
   buttonContainer: {
     height: 40,
