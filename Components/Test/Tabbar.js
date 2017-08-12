@@ -16,6 +16,7 @@ import Home from '/Users/quynhngan/KitDream/Components/Test/Home.js'
 import Profile from '/Users/quynhngan/KitDream/Components/Test/Profile.js'
 import Filter from '/Users/quynhngan/KitDream/Components/Test/Search/Filter.js'
 import global from '/Users/quynhngan/KitDream/Components/Test/global.js'
+
 export default class Tabbar extends Component {
   constructor(props){
     super(props);
@@ -68,16 +69,7 @@ export default class Tabbar extends Component {
     onPress={() => this.setState({ selectedTab: 'Home' })}>
     <Home />
   </TabNavigator.Item>
-  <TabNavigator.Item
-    selected={selectedTab === 'Search'}
-    title="Search"
-    renderIcon={() => <Image source={search} style={iconStyle} />}
-    renderSelectedIcon={() => <Image source={search_1} style={iconStyle} />}
-      selectedTitleStyle ={{color:"#FFC0CB", fontFamily:"Helvetica Neue"}}
-    onPress={() => this.setState({ selectedTab: 'Search' })}>
-    <Search/>
 
-  </TabNavigator.Item>
   <TabNavigator.Item
     selected={selectedTab === 'ShoppingList'}
     title="Shopping"

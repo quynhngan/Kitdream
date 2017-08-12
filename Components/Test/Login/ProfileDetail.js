@@ -2,12 +2,29 @@ import React, { Component } from 'react';
 import {  View,Text,  StyleSheet,Dimensions,Image, TouchableOpacity} from 'react-native';
 import chef_3 from "/Users/quynhngan/KitDream/image/chef_3.png";
 import profile from "/Users/quynhngan/KitDream/image/profile.png";
+import getUser from '/Users/quynhngan/KitDream/Components/Test/Login/getUser.js'
+import saveUser from '/Users/quynhngan/KitDream/Components/Test/Login/saveUser.js'
 
 const { height} = Dimensions.get ('window');
 export default class Header extends Component {
   static navigationOptions = {header:null}
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {}
+    }
+  }
+  componentDidMount() {
+    getUser()
+    .then(user => this.setState({user}))
+    .catch((error) => {
+      console.error(error);
+    })
+  }
   render() {
     const {wrapper,iconStyle,logoProfile,_wrapper, textStyle,__wrapper,buttonContainer,buttonText} = styles;
+    const {user} = this.state;
+
     return (
       <View style ={{backgroundColor:"#FFFFFF", flex: 1}}>
       <View style={{height:height/10}}>
@@ -19,11 +36,11 @@ export default class Header extends Component {
       <Image source = {profile} style ={logoProfile}/>
       </View>
 
-      <Text style = {textStyle}> Name:  </Text>
-      <Text style = {textStyle}> Email: </Text>
+      <Text style = {textStyle}> Name: {user.full_name} </Text>
+      <Text style = {textStyle}> Email:{user.email} </Text>
       <View>
       <TouchableOpacity style = {buttonContainer}
-      onPress={()=>{this.props.navigation.navigate('LoginForm')}}
+      onPress={()=>saveUser({})}
       >
       <Text style ={buttonText}> Logout </Text>
       </TouchableOpacity>
