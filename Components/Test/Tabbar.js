@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { View,Text, TouchableOpacity,Image ,StyleSheet} from 'react-native';
 import Recipe from "/Users/quynhngan/KitDream/Components/Test/Recipe/Recipe.js";
 import Search from "/Users/quynhngan/KitDream/Components/Test/Search/Search.js";
-import ShoppingList from "/Users/quynhngan/KitDream/Components/Test/ShoppingList.js";
+import ShoppingList from "/Users/quynhngan/KitDream/Components/Test/Shopping/ShoppingList.js";
 import profile from "/Users/quynhngan/KitDream/image/appicon/profile.png";
 import profile_1 from "/Users/quynhngan/KitDream/image/appicon/profile_1.png";
 import recipe from "/Users/quynhngan/KitDream/image/appicon/recipe.png";
@@ -22,27 +22,36 @@ export default class Tabbar extends Component {
     this.state = {
       selectedTab: 'Home',
       cart:[]
-  };
-  global.addIngredientToShopping = this.addIngredientToShopping.bind(this);
+    };
+    global.addIngredientToShopping = this.addIngredientToShopping.bind(this);
+    global.setCategory = this.setCategory.bind(this);
+    global.setDifficuty = this.setDifficuty.bind(this);
   }
 
   componentDidMount() {
-    return fetch('http://localhost:4000/recipes')
+   fetch('http://localhost:4000/search')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
           isLoading: false,
           recipes: responseJson
-        }, function() {
         });
-      })
+      });
+      /*getShoppingList()
+      .then(cart => this.setState({cart}))
       .catch((error) => {
         console.error(error);
-      });
+      });*/
   }
   addIngredientToShopping(recipes){
     this.setState({cart: this.state.cart.concat(recipes)})
-
+  /*  ()=> saveShoppingList(this.state.cart)*/
+  }
+  setDifficuty(difficuty) {
+    this.setState({difficuty: difficuty})
+  }
+  setCategory(category) {
+    this.setState({category: category})
   }
   render(){
     const {iconStyle} = styles;

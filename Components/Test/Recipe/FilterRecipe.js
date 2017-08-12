@@ -6,13 +6,18 @@ import dessert from "/Users/quynhngan/KitDream/image/search_icon/dessert.png";
 import star from "/Users/quynhngan/KitDream/image/search_icon/star.png";
 import hard from "/Users/quynhngan/KitDream/image/search_icon/hard.png";
 import medium from "/Users/quynhngan/KitDream/image/search_icon/medium.png";
+import global from '/Users/quynhngan/KitDream/Components/Test/global.js'
+
 const {height,width} = Dimensions.get('window');
 export default class FilterRecipe extends Component{
 static navigationOptions = {headerTintColor:"white" ,title: 'Filter',headerStyle: {
          backgroundColor:"#FFC0CB"
        }}
-  setCategory(name) {
-    this.setState({category: name})
+  setCategory(category) {
+    this.setState({category: category});
+  }
+  setDifficuty(difficuty) {
+    this.setState({difficuty: difficuty});
   }
   render(){
     const {wrapper,textTitle,imageStyle,text,_imageStyle,textDone,_textTitle,container} = styles;
@@ -29,41 +34,51 @@ onPress = {() => this.setCategory('main')}
 <Text style ={textTitle}> Main </Text>
 </View>
 </TouchableHighlight>
-<TouchableOpacity>
+<TouchableHighlight underlayColor="white"
+onPress = {() => this.setCategory('dessert')}
+>
 <View>
 <Image source ={dessert} style={imageStyle}/>
 <Text style ={textTitle}> Dessert </Text>
 </View>
-</TouchableOpacity>
-<TouchableOpacity>
+</TouchableHighlight>
+<TouchableHighlight underlayColor="white"
+onPress = {() => this.setCategory('drink')}
+>
 <View>
 <Image source ={drink} style={imageStyle}/>
 <Text style ={textTitle}> Drink </Text>
 </View>
-</TouchableOpacity>
+</TouchableHighlight>
 </View>
 </View>
 <View>
 <Text style = {_textTitle}> Difficuty </Text>
 <View style = {wrapper}>
-<TouchableOpacity>
+<TouchableHighlight underlayColor="white"
+onPress = {() => this.setDifficuty('easy')}
+>
 <View>
 <Image source ={star} style={imageStyle}/>
 <Text style ={textTitle}> Easy </Text>
 </View>
-</TouchableOpacity>
-<TouchableOpacity>
+</TouchableHighlight>
+<TouchableHighlight underlayColor="white"
+onPress = {() => this.setDifficuty('medium')}
+>
 <View>
 <Image source ={star} style={imageStyle}/>
 <Text style ={textTitle}> Medium </Text>
 </View>
-</TouchableOpacity>
-<TouchableOpacity>
+</TouchableHighlight>
+<TouchableHighlight underlayColor="white"
+onPress = {() => this.setDifficuty('hard')}
+>
 <View>
 <Image source ={star} style={imageStyle}/>
 <Text style ={textTitle}> Hard </Text>
 </View>
-</TouchableOpacity>
+</TouchableHighlight>
 </View>
 </View>
 <View>
@@ -81,7 +96,11 @@ onPress = {() => this.setCategory('main')}
 </View>
 </View>
 <TouchableOpacity
-onPress={()=>{this.props.navigation.goBack()}}
+onPress={()=>{
+  this.props.navigation.navigate('Recipe',{
+    difficuty: this.state.difficuty,
+    category: this.state.category
+  })}}
 >
 <Text style={textDone}> Done </Text>
 

@@ -16,7 +16,15 @@ export default class Recipe extends Component{
     }
   }
   componentDidMount() {
-    return fetch('http://localhost:4000/recipes')
+    let category, difficuty;
+    let url = "http://localhost:4000/recipes/search?";
+
+    if (this.props.navigation.state.params && this.props.navigation.state.params.category)
+      url = url + "&category=" + this.props.navigation.state.params.category;
+    if (this.props.navigation.state.params && this.props.navigation.state.params.difficuty)
+      url = url + "&difficuty=" + this.props.navigation.state.params.difficuty;
+
+    return fetch(url)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({

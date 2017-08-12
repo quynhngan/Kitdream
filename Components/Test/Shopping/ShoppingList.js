@@ -15,10 +15,14 @@ export default class ShoppingList extends Component {
         </View>
       </View>
       <ScrollView>
-      {this.props.cart.map((recipe) => {
+      {this.props.cart.map((ingredient) => {
         return (
           <View style= {_wrapper}>
-            <Text style ={textStyle}>{recipe.name}</Text>
+
+            <Text style ={textStyle}>{ingredient.name}</Text>
+            <Text style ={textStyle}> -{ingredient.number_of_units}</Text>
+            <Text style ={textStyle}> {ingredient.units_of_measurement}</Text>
+
           </View>
         )
       })}
@@ -45,7 +49,8 @@ _wrapper:{
   borderBottomWidth:1,
   alignItems: 'center',
   justifyContent: 'center',
-  borderColor: "#95989A"
+  borderColor: "#95989A",
+  flexDirection:'row'
 },
 textStyle: {
   fontSize:14,

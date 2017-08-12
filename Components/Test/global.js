@@ -1,3 +1,5 @@
 module.exports ={
-  addIngredientToShopping: null
+  addIngredientToShopping: null,
+  setCategory: null,
+  setDifficuty: null,
 };

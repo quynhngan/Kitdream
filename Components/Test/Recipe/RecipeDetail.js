@@ -9,8 +9,8 @@ const {height,width} = Dimensions.get('window');
 export default class RecipeDetail extends Component {
   static navigationOptions = {headerTintColor:"white",headerStyle: {
            backgroundColor:"#FFC0CB"} }
-  addThisIngredientToShopping(recipe){
-    global.addIngredientToShopping(recipe);
+  addThisIngredientToShopping(ingredient){
+    global.addIngredientToShopping(ingredient);
   }
 
 
@@ -63,7 +63,7 @@ export default class RecipeDetail extends Component {
 })}
 </View>
   <TouchableOpacity style = {buttonContainer}
-  onPress = { this.addThisIngredientToShopping.bind(this, this.props.navigation.state.params.recipes)}
+  onPress = { this.addThisIngredientToShopping.bind(this,this.props.navigation.state.params.recipes.ingredients)}
   >
 <Text style ={button}> Add to Shopping List </Text>
 </TouchableOpacity>
