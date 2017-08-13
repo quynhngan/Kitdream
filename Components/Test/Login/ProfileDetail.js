@@ -21,6 +21,16 @@ export default class Header extends Component {
       console.error(error);
     })
   }
+  logout() {
+    saveUser({})
+    .then(user => {
+      this.setState({user: {}})
+      this.props.navigation.navigate('LoginForm')
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+  }
   render() {
     const {wrapper,iconStyle,logoProfile,_wrapper, textStyle,__wrapper,buttonContainer,buttonText} = styles;
     const {user} = this.state;
@@ -37,10 +47,10 @@ export default class Header extends Component {
       </View>
 
       <Text style = {textStyle}> Name: {user.full_name} </Text>
-      <Text style = {textStyle}> Email:{user.email} </Text>
+      <Text style = {textStyle}> Email: {user.email} </Text>
       <View>
       <TouchableOpacity style = {buttonContainer}
-      onPress={()=>saveUser({})}
+      onPress={()=>this.logout()}
       >
       <Text style ={buttonText}> Logout </Text>
       </TouchableOpacity>

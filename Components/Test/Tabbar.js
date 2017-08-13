@@ -25,10 +25,11 @@ export default class Tabbar extends Component {
       cart:[]
     };
     global.addIngredientToShopping = this.addIngredientToShopping.bind(this);
-    global.setCategory = this.setCategory.bind(this);
-    global.setDifficuty = this.setDifficuty.bind(this);
+    global.emptyCart = this.emptyCart.bind(this);
   }
-
+  emptyCart() {
+    this.setState({cart: []})
+  }
   componentDidMount() {
    fetch('http://localhost:4000/search')
       .then((response) => response.json())

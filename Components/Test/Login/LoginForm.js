@@ -30,12 +30,14 @@ signIn() {
     if (responseJson.errors) {
       this.alertError()
     } else {
-      this.props.navigation.navigate('ProfileDetail')
       saveUser(responseJson)
       .then(user => this.setState({user}))
       .catch((error) => {
         console.error(error);
       })
+      setTimeout(() => {
+        this.props.navigation.navigate('ProfileDetail')
+      }, 200)
     }
   }
 )
