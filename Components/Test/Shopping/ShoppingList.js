@@ -7,12 +7,19 @@ const { height,width} = Dimensions.get ('window');
 export default class ShoppingList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      cart: props.cart
+    }
   }
   emptyCart(){
     global.emptyCart();
   }
+  toggleIngredient(ingredient) {
+    ingredient.toggle = !ingredient.toggle
+    this.forceUpdate()
+  }
   render() {
-    const {wrapper,iconStyle,_wrapper,textStyle,_textStyle,textStyleReset} = styles;
+    const {wrapper,iconStyle,_wrapper,_textStyle,textStyleReset} = styles;
     return (
       <View>
       <View style={{height:height/10}}>
@@ -24,17 +31,17 @@ export default class ShoppingList extends Component {
         </View>
       </View>
       <ScrollView>
-      {this.props.cart.map((ingredient) => {
+      {this.state.cart.map((ingredient) => {
         return (
           <TouchableOpacity
+          onPress ={()=> this.toggleIngredient(ingredient)}
 
           >
           <View style= {_wrapper}>
 
-            <Text style ={textStyle}>{ingredient.name}</Text>
-            <Text style ={textStyle}> -{ingredient.number_of_units}</Text>
-            <Text style ={textStyle}> {ingredient.units_of_measurement}</Text>
-
+            <Text style ={[styles.textStyle,ingredient.toggle && styles.textStyle_]}>{ingredient.name}</Text>
+            <Text > -{ingredient.number_of_units}</Text>
+            <Text > {ingredient.units_of_measurement}</Text>
           </View>
           </TouchableOpacity>
         )
@@ -45,6 +52,7 @@ export default class ShoppingList extends Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   wrapper: {
     height: height/10,
@@ -72,6 +80,12 @@ textStyle: {
   fontSize:14,
   color: '#95989A',
   justifyContent:'center',
+},
+textStyle_: {
+  fontSize:14,
+  color: '#95989A',
+  justifyContent:'center',
+  textDecorationLine:'line-through'
 },
 _textStyle: {
   fontSize:14,

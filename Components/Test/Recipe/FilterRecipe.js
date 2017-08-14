@@ -9,10 +9,17 @@ import medium from "/Users/quynhngan/KitDream/image/search_icon/medium.png";
 import global from '/Users/quynhngan/KitDream/Components/Test/global.js'
 
 const {height,width} = Dimensions.get('window');
-export default class FilterRecipe extends Component{
+export default class FilterRecipe extends Component {
 static navigationOptions = {headerTintColor:"white" ,title: 'Filter',headerStyle: {
          backgroundColor:"#FFC0CB"
        }}
+   constructor(props) {
+     super(props);
+     this.state = {
+       difficuty: null,
+       category: null
+     }
+   }
   setCategory(category) {
     this.setState({category: category});
   }

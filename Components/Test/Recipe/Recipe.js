@@ -12,7 +12,7 @@ export default class Recipe extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true
+      isLoading: true,
     }
   }
   componentDidMount() {
@@ -25,6 +25,20 @@ export default class Recipe extends Component{
       url = url + "&difficuty=" + this.props.navigation.state.params.difficuty;
 
     return fetch(url)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          recipes: responseJson
+        }, function() {
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  reset() {
+    return fetch("http://localhost:4000/recipes/search")
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -51,7 +65,11 @@ export default class Recipe extends Component{
       <ScrollView style = {{flex:1, backgroundColor:'#FFF6F7'}}>
       <View style={{height:height/10}}>
         <View style = {_wrapper}>
+        <TouchableOpacity
+        onPress ={()=>{this.reset()}}
+        >
         <Image source ={chef_3} style = {iconStyle}/>
+        </TouchableOpacity>
         <TouchableOpacity
        onPress={()=>{this.props.navigation.navigate('FilterRecipe')}}
         >
