@@ -10,9 +10,19 @@ export default class RecipeDetail extends Component {
   static navigationOptions = {headerTintColor:"white",headerStyle: {
            backgroundColor:"#FFC0CB"} }
   addThisIngredientToShopping(ingredient){
+    global.currentRecipe =   this.props.navigation.state.params.recipes
+    global.currentServing =   this.props.navigation.state.params.recipes.number_of_servings
     global.addIngredientToShopping(ingredient);
   }
+  incrServing(number_of_servings) {
+    this.props.navigation.state.params.recipes.number_of_servings += 1;
+    this.forceUpdate()
+  }
+  decrServing(number_of_servings) {
 
+    this.props.navigation.state.params.recipes.number_of_servings -= 1;
+    this.forceUpdate()
+  }
 
   render() {
 
@@ -40,12 +50,18 @@ export default class RecipeDetail extends Component {
 <View style = {{justifyContent:'space-between',flexDirection:'row'}}>
 <View style={wrapper_2}>
 <Text style={textStyle}> Pre-Time: </Text>
-<Text style = {{fontSize:16}}> {this.props.navigation.state.params.recipes.preparation_time}</Text>
+<Text style = {{fontSize:16}}>{this.props.navigation.state.params.recipes.preparation_time}</Text>
 <Text style={{fontSize:16}}>min</Text>
 </View>
 <View style ={wrapper_2} >
 <Text style={textStyle}> Serving: </Text>
+<TouchableOpacity  onPress={() => this.decrServing(this.props.navigation.state.params.recipes.number_of_servings)}>
+<Text style={textStyle}> - </Text>
+</TouchableOpacity>
 <Text style = {{fontSize:16}}> {this.props.navigation.state.params.recipes.number_of_servings} </Text>
+<TouchableOpacity onPress={() => this.incrServing(this.props.navigation.state.params.recipes.number_of_servings)}>
+<Text style={textStyle}> + </Text>
+</TouchableOpacity>
 </View>
 </View>
 <View style ={wrapper_2} >
@@ -56,7 +72,7 @@ export default class RecipeDetail extends Component {
   return (
     <View style={_wrapper}>
     <Text>- {ingredient.name}:</Text>
-    <Text style={{paddingHorizontal:5}}>{ingredient.number_of_units}</Text>
+    <Text style={{paddingHorizontal:5}}>{ingredient.number_of_units*this.props.navigation.state.params.recipes.number_of_servings}</Text>
     <Text >{ingredient.units_of_measurement}</Text>
     </View>
   );

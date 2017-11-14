@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View,Text, StyleSheet,ScrollView,Dimensions,Image, TouchableOpacity, Alert} from 'react-native';
 import chef_3 from "/Users/quynhngan/KitDream/image/chef_3.png";
 import CheckBox from 'react-native-check-box';
 import global from '/Users/quynhngan/KitDream/Components/Test/global.js'
+
 const { height,width} = Dimensions.get ('window');
 export default class ShoppingList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cart: props.cart
-    }
+  static navigationOptions = {header:null}
+  static contextTypes = {
+    cart: PropTypes.array
   }
   emptyCart(){
     global.emptyCart();
@@ -19,7 +19,9 @@ export default class ShoppingList extends Component {
     this.forceUpdate()
   }
   render() {
-    const {wrapper,iconStyle,_wrapper,_textStyle,textStyleReset} = styles;
+    const {wrapper,iconStyle,_wrapper,_textStyle,textStyleReset,wrapper_} = styles;
+    const carts = this.props.screenProps || []
+
     return (
       <View>
       <View style={{height:height/10}}>
@@ -30,8 +32,9 @@ export default class ShoppingList extends Component {
         </TouchableOpacity>
         </View>
       </View>
+      <View>
       <ScrollView>
-      {this.state.cart.map((ingredient) => {
+      {carts.map((ingredient) => {
         return (
           <TouchableOpacity
           onPress ={()=> this.toggleIngredient(ingredient)}
@@ -40,15 +43,22 @@ export default class ShoppingList extends Component {
           <View style= {_wrapper}>
 
             <Text style ={[styles.textStyle,ingredient.toggle && styles.textStyle_]}>{ingredient.name}</Text>
-            <Text > -{ingredient.number_of_units}</Text>
+            <Text > -{ingredient.number_of_units*global.currentServing}</Text>
             <Text > {ingredient.units_of_measurement}</Text>
           </View>
           </TouchableOpacity>
         )
       })}
-
-      </ScrollView>
+      <TouchableOpacity
+     onPress={()=>{this.props.navigation.navigate('Oder')}}
+      >
+      <Text> Buy Now </Text>
+      </TouchableOpacity>
+      <View style={wrapper_}>
       </View>
+      </ScrollView>
+</View>
+</View>
     );
   }
 }
@@ -61,6 +71,13 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     justifyContent:'center',
   flexDirection: 'row',
+  },
+  wrapper_: {
+    height: height/4,
+    alignItems: 'center',
+    paddingTop: 20,
+    justifyContent:'center',
+
   },
   iconStyle:{
     width: 32,

@@ -7,6 +7,9 @@ import LoginForm from '/Users/quynhngan/KitDream/Components/Test/Login/LoginForm
 import ProfileDetail from '/Users/quynhngan/KitDream/Components/Test/Login/ProfileDetail.js'
 import Search from '/Users/quynhngan/KitDream/Components/Test/Search/Search.js';
 import FilterRecipe from '/Users/quynhngan/KitDream/Components/Test/Recipe/FilterRecipe.js';
+import ShoppingList from '/Users/quynhngan/KitDream/Components/Test/Shopping/ShoppingList.js';
+import Oder from '/Users/quynhngan/KitDream/Components/Test/Shopping/Oder.js';
+
 
  export const HomeStack = StackNavigator({
    Recipe: {
@@ -31,11 +34,19 @@ export const ProfileStack = StackNavigator({
   screen: ProfileDetail,
 },
 });
-export const FilterStack = StackNavigator({
+/*export const FilterStack = StackNavigator({
   Search: {
     screen: Search,
   },
   Recipe:{
     screen: Recipe,
+  },
+});*/
+export const ShoppingStack = StackNavigator({
+  ShoppingList: {
+    screen: ShoppingList,
+  },
+  Oder:{
+    screen: Oder,
   },
 });

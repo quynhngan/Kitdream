@@ -6,6 +6,8 @@ import food from "/Users/quynhngan/KitDream/image/food.jpg";
 import food_2 from "/Users/quynhngan/KitDream/image/food_2.jpg";
 import food_3 from "/Users/quynhngan/KitDream/image/food_3.jpg";
 import chef_3 from "/Users/quynhngan/KitDream/image/chef_3.png";
+import global from '/Users/quynhngan/KitDream/Components/Test/global.js'
+
 const {height,width} = Dimensions.get('window');
 export default class Recipe extends Component{
   static navigationOptions = {header:null}
@@ -16,13 +18,15 @@ export default class Recipe extends Component{
     }
   }
   componentDidMount() {
-    let category, difficuty;
+    let category, difficuty,preparation_time;
     let url = "http://localhost:4000/recipes/search?";
 
     if (this.props.navigation.state.params && this.props.navigation.state.params.category)
       url = url + "&category=" + this.props.navigation.state.params.category;
     if (this.props.navigation.state.params && this.props.navigation.state.params.difficuty)
       url = url + "&difficuty=" + this.props.navigation.state.params.difficuty;
+    if (this.props.navigation.state.params && this.props.navigation.state.params.preparation_time)
+        url = url + "&preparation_time=" + this.props.navigation.state.params.preparation_time;
 
     return fetch(url)
       .then((response) => response.json())

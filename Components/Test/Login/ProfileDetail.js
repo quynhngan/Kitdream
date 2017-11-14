@@ -4,7 +4,7 @@ import chef_3 from "/Users/quynhngan/KitDream/image/chef_3.png";
 import profile from "/Users/quynhngan/KitDream/image/profile.png";
 import getUser from '/Users/quynhngan/KitDream/Components/Test/Login/getUser.js'
 import saveUser from '/Users/quynhngan/KitDream/Components/Test/Login/saveUser.js'
-
+import global from '/Users/quynhngan/KitDream/Components/Test/global.js'
 const { height} = Dimensions.get ('window');
 export default class Header extends Component {
   static navigationOptions = {header:null}
@@ -25,6 +25,7 @@ export default class Header extends Component {
     saveUser({})
     .then(user => {
       this.setState({user: {}})
+      global.emptyCart();
       this.props.navigation.navigate('LoginForm')
     })
     .catch((error) => {

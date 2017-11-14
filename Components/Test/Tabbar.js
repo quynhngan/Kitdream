@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import { View,Text, TouchableOpacity,Image ,StyleSheet} from 'react-native';
 import Recipe from "/Users/quynhngan/KitDream/Components/Test/Recipe/Recipe.js";
 import Search from "/Users/quynhngan/KitDream/Components/Test/Search/Search.js";
@@ -16,8 +17,12 @@ import Home from '/Users/quynhngan/KitDream/Components/Test/Home.js'
 import Profile from '/Users/quynhngan/KitDream/Components/Test/Profile.js'
 import Filter from '/Users/quynhngan/KitDream/Components/Test/Search/Filter.js'
 import global from '/Users/quynhngan/KitDream/Components/Test/global.js'
+import OrderShopping from '/Users/quynhngan/KitDream/Components/Test/orderShopping.js'
 
 export default class Tabbar extends Component {
+  static childContextTypes = {
+    cart: PropTypes.array
+  }
   constructor(props){
     super(props);
     this.state = {
@@ -44,6 +49,9 @@ export default class Tabbar extends Component {
       .catch((error) => {
         console.error(error);
       });*/
+  }
+  getChildContext() {
+    return { cart: this.state.cart }
   }
   addIngredientToShopping(recipes){
     this.setState({cart: this.state.cart.concat(recipes)})
@@ -72,15 +80,14 @@ export default class Tabbar extends Component {
   </TabNavigator.Item>
 
   <TabNavigator.Item
-    selected={selectedTab === 'ShoppingList'}
+    selected={selectedTab === 'orderShopping'}
     title="Shopping"
     renderIcon={() => <Image source={shopping} style={iconStyle} />}
     renderSelectedIcon={() => <Image source={shopping_1} style={iconStyle} />}
     badgeText={cart.length}
       selectedTitleStyle ={{color:"#FFC0CB", fontFamily:"Helvetica Neue"}}
-    onPress={() => this.setState({ selectedTab: 'ShoppingList' })}>
-
-    <ShoppingList cart = {cart}/>
+    onPress={() => this.setState({ selectedTab: 'orderShopping' })}>
+    <OrderShopping screenProps={cart}/>
 
   </TabNavigator.Item>
   <TabNavigator.Item

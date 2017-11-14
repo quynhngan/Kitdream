@@ -17,7 +17,8 @@ static navigationOptions = {headerTintColor:"white" ,title: 'Filter',headerStyle
      super(props);
      this.state = {
        difficuty: null,
-       category: null
+       category: null,
+       preparation_time: null,
      }
    }
   setCategory(category) {
@@ -26,6 +27,10 @@ static navigationOptions = {headerTintColor:"white" ,title: 'Filter',headerStyle
   setDifficuty(difficuty) {
     this.setState({difficuty: difficuty});
   }
+  setPretime(preparation_time){
+    this.setState({preparation_time: preparation_time});
+  }
+
   render(){
     const {wrapper,textTitle,imageStyle,text,_imageStyle,textDone,_textTitle,container} = styles;
     return(
@@ -91,13 +96,19 @@ onPress = {() => this.setDifficuty('hard')}
 <View>
 <Text style = {_textTitle}> Preparation-Time </Text>
 <View style = {wrapper}>
-<TouchableOpacity>
-<Text style = {text}>Under 30 min</Text>
+<TouchableOpacity
+onPress = {() => this.setPretime(15)}
+>
+<Text style = {text}>Under 15 min</Text>
 </TouchableOpacity>
-<TouchableOpacity>
+<TouchableOpacity
+onPress = {() => this.setPretime(40)}
+>
 <Text style = {text}>Under 60 min</Text>
 </TouchableOpacity>
-<TouchableOpacity>
+<TouchableOpacity
+onPress = {() => this.setPretime(60)}
+>
 <Text style = {text}>Upper 60 min</Text>
 </TouchableOpacity>
 </View>
@@ -106,7 +117,8 @@ onPress = {() => this.setDifficuty('hard')}
 onPress={()=>{
   this.props.navigation.navigate('Recipe',{
     difficuty: this.state.difficuty,
-    category: this.state.category
+    category: this.state.category,
+    preparation_time: this.state.preparation_time
   })}}
 >
 <Text style={textDone}> Done </Text>

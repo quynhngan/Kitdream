@@ -19,12 +19,12 @@ import Recipe from "./Components/Test/Recipe/Recipe"
 import Search from "./Components/Test/Search/Search"
 import HomeScreen from "./Components/Test/HomeScreen"
 import LoginForm from "./Components/Test/Login/LoginForm"
+import Oder from "/Users/quynhngan/KitDream/Components/Test/Shopping/Oder.js";
 console.disableYellowBox = true;
 export default class KitDream extends Component {
   render() {
     return (
     <View>
-<ProfileDetail/>
 <Tabbar/>
     </View>
 
