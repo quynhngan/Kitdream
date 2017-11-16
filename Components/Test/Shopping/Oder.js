@@ -8,18 +8,7 @@ export default class Header extends Component {
   static navigationOptions = {headerTintColor:"white",headerStyle: {
            backgroundColor:"#FFC0CB"} }
 
-  render() {
-    const {_wrapper} = styles;
-    return (
-  <View>
-  <View style= {_wrapper}>
-    <Text > {global.currentRecipe.name}</Text>
-    <Text> -{global.currentRecipe.number_of_servings} </Text>
-    <Text> Price </Text>
-  </View>
-  </View>
-    );
-  }
+  
 
 }
 

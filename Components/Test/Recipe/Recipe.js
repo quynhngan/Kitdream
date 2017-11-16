@@ -93,7 +93,7 @@ export default class Recipe extends Component{
             </TouchableOpacity>
             </View>
             <View style = {{flex:1}}>
-            <Text style ={nameStyle}> {recipes.name} </Text>
+            <Text style ={nameStyle}> {recipes.name.toUpperCase()} </Text>
             </View>
           </View>
 

@@ -29,8 +29,12 @@ export default class Tabbar extends Component {
       selectedTab: 'Home',
       cart:[]
     };
-    global.addIngredientToShopping = this.addIngredientToShopping.bind(this);
+    global.addRecipeToShopping = this.addRecipeToShopping.bind(this);
     global.emptyCart = this.emptyCart.bind(this);
+    global.removeRecipe = this.removeRecipe.bind(this);
+    global.incrRecipe = this.incrRecipe.bind(this);
+    global.decrRecipe = this.decrRecipe.bind(this);
+
   }
   emptyCart() {
     this.setState({cart: []})
@@ -50,10 +54,38 @@ export default class Tabbar extends Component {
         console.error(error);
       });*/
   }
+  removeRecipe(name) {
+       const newCart = this.state.cart.filter(recipes => recipes.name !== name);
+       this.setState({ cart: newCart },
+
+       );
+   }
+   incrRecipe(name) {
+       const newCart = this.state.cart.map(recipes => {
+           if (recipes.name !== name ) return recipes;
+           return { name: recipes.name,image_url: recipes.image_url, number_of_servings: recipes.number_of_servings + 1 };
+
+       });
+       this.setState({ cart: newCart },
+       );
+   }
+
+  decrRecipe(name) {
+       const newCart = this.state.cart.map(recipes => {
+           if (recipes.name !== name ) return recipes;
+           return { name: recipes.name,image_url: recipes.image_url, number_of_servings: recipes.number_of_servings - 1 };
+           
+
+       });
+       this.setState({ cart: newCart },
+       );
+
+   }
+
   getChildContext() {
     return { cart: this.state.cart }
   }
-  addIngredientToShopping(recipes){
+  addRecipeToShopping(recipes){
     this.setState({cart: this.state.cart.concat(recipes)})
   /*  ()=> saveShoppingList(this.state.cart)*/
   }
@@ -63,6 +95,7 @@ export default class Tabbar extends Component {
   setCategory(category) {
     this.setState({category: category})
   }
+
   render(){
     const {iconStyle} = styles;
     const {types,selectedTab,cart}= this.state

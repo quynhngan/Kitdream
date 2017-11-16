@@ -14,13 +14,23 @@ export default class ShoppingList extends Component {
   emptyCart(){
     global.emptyCart();
   }
-  toggleIngredient(ingredient) {
-    ingredient.toggle = !ingredient.toggle
-    this.forceUpdate()
+  removeRecipe(name) {
+      global.removeRecipe(name);
   }
+  incrRecipe(name) {
+      global.incrRecipe(name);
+  }
+  decrRecipe(name) {
+      global.decrRecipe(name);
+  }
+
+  /*toggleIngredient(recipe) {
+    recipe.toggle = !recipe.toggle
+    this.forceUpdate()
+  }*/
   render() {
-    const {wrapper,iconStyle,_wrapper,_textStyle,textStyleReset,wrapper_} = styles;
-    const carts = this.props.screenProps || []
+    const {wrapper,iconStyle,_wrapper,textStyle,_textStyle,textStyleReset,wrapper_,productImage,mainRight,txtName,txtPrice,productStyle,numberOfProduct} = styles;
+    const cart = this.props.screenProps || []
 
     return (
       <View>
@@ -34,21 +44,39 @@ export default class ShoppingList extends Component {
       </View>
       <View>
       <ScrollView>
-      {carts.map((ingredient) => {
-        return (
-          <TouchableOpacity
-          onPress ={()=> this.toggleIngredient(ingredient)}
+      {cart.map((recipes) => (
 
-          >
-          <View style= {_wrapper}>
 
-            <Text style ={[styles.textStyle,ingredient.toggle && styles.textStyle_]}>{ingredient.name}</Text>
-            <Text > -{ingredient.number_of_units*global.currentServing}</Text>
-            <Text > {ingredient.units_of_measurement}</Text>
-          </View>
-          </TouchableOpacity>
+
+          <View style={productStyle}>
+                      <Image source ={{url:recipes.image_url}} style={productImage}/>
+                          <View style={[mainRight]}>
+                              <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
+                                  <Text style={txtName}>{recipes.name}</Text>
+                                  <TouchableOpacity onPress={() => {this.removeRecipe(recipes.name)}}>
+                                      <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
+                                  </TouchableOpacity>
+                              </View>
+                              <View>
+                                  <Text style={txtPrice}> $$ </Text>
+                              </View>
+
+                                   <View style={numberOfProduct}>
+                                   <TouchableOpacity onPress={() => this.decrRecipe(recipes.name)}>
+                                       <Text style = {textStyle}>-</Text>
+                                   </TouchableOpacity>
+                                       <Text style ={textStyle}> {recipes.number_of_servings} </Text>
+                                       <TouchableOpacity onPress={() => this.incrRecipe(recipes.name)}>
+                                           <Text style={textStyle}>+</Text>
+                                       </TouchableOpacity>
+                                   </View>
+
+                          </View>
+                      </View>
+
+
         )
-      })}
+      )}
       <TouchableOpacity
      onPress={()=>{this.props.navigation.navigate('Oder')}}
       >
@@ -94,9 +122,10 @@ _wrapper:{
   flexDirection:'row'
 },
 textStyle: {
-  fontSize:14,
+  fontSize:16,
   color: '#95989A',
   justifyContent:'center',
+  letterSpacing: 4,
 },
 textStyle_: {
   fontSize:14,
@@ -113,6 +142,55 @@ textStyleReset:{
   marginLeft: 120,
   color: 'white',
   fontSize: 15
-}
+},
+productStyle: {
+       flexDirection: 'row',
+       margin: 10,
+       padding: 10,
+       backgroundColor: '#FFFFFF',
+       borderRadius: 2,
+       shadowColor: '#3B5458',
+       shadowOffset: { width: 0, height: 3 },
+       shadowOpacity: 0.2
+   },
+   productImage: {
+       width: 30,
+       height: 60,
+       flex: 1,
+       resizeMode: 'center'
+   },
+   mainRight: {
+       flex: 3,
+       justifyContent: 'space-between'
+   },
+   productController: {
+       flexDirection: 'row'
+   },
+   numberOfProduct: {
+       flex: 1,
+       flexDirection: 'row',
+       justifyContent: 'space-around'
+   },
+   txtName: {
+       paddingLeft: 20,
+       color: '#A7A7A7',
+       fontSize: 16,
+       fontWeight: '400',
+       fontFamily: 'Avenir'
+   },
+   txtPrice: {
+       paddingLeft: 20,
+       color: '#C21C70',
+       fontSize: 16,
+       fontWeight: '400',
+       fontFamily: 'Avenir'
+   },
+   numberOfProduct: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+
+    },
+
 
 });
