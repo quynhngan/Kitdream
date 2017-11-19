@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import Home from "./Components/Test/Home"
 import ProfileDetail from "/Users/quynhngan/KitDream/Components/Test/Login/ProfileDetail.js"
+import Contact from "/Users/quynhngan/KitDream/Components/Test/Login/Contact.js"
 import Tabbar from "./Components/Test/Tabbar"
 import Recipe from "./Components/Test/Recipe/Recipe"
 import Search from "./Components/Test/Search/Search"
@@ -26,6 +27,8 @@ export default class KitDream extends Component {
     return (
     <View>
 <Tabbar/>
+<ProfileDetail/>
+<Contact/>
     </View>
 
 

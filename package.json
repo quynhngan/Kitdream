@@ -12,6 +12,7 @@
     "react-native": "0.50.3",
     "react-native-check-box": "^2.0.0",
     "react-native-checkbox": "^1.1.0",
+    "react-native-maps": "^0.17.1",
     "react-native-tab-navigator": "happypancake/react-native-tab-navigator",
     "react-native-vector-icons": "^4.2.0",
     "react-navigation": "^1.0.0-beta.11"

@@ -74,7 +74,7 @@ export default class Tabbar extends Component {
        const newCart = this.state.cart.map(recipes => {
            if (recipes.name !== name ) return recipes;
            return { name: recipes.name,image_url: recipes.image_url, number_of_servings: recipes.number_of_servings - 1 };
-           
+
 
        });
        this.setState({ cart: newCart },

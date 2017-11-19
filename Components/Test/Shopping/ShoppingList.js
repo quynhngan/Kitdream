@@ -29,9 +29,10 @@ export default class ShoppingList extends Component {
     this.forceUpdate()
   }*/
   render() {
-    const {wrapper,iconStyle,_wrapper,textStyle,_textStyle,textStyleReset,wrapper_,productImage,mainRight,txtName,txtPrice,productStyle,numberOfProduct} = styles;
+    const {wrapper,iconStyle,_wrapper,buynowButton,buynowTitle,textStyle,_textStyle,textStyleReset,wrapper_,recipeImage,mainRight,txtName,txtPrice,recipeStyle,numberOfProduct} = styles;
     const cart = this.props.screenProps || []
-
+    const arrTotal = cart.map(recipes => recipes.price * recipes.number_of_servings);
+       const total = arrTotal.length ? arrTotal.reduce((a, b) => a + b) : 0;
     return (
       <View>
       <View style={{height:height/10}}>
@@ -48,8 +49,8 @@ export default class ShoppingList extends Component {
 
 
 
-          <View style={productStyle}>
-                      <Image source ={{url:recipes.image_url}} style={productImage}/>
+          <View style={recipeStyle}>
+                      <Image source ={{url:recipes.image_url}} style={recipeImage}/>
                           <View style={[mainRight]}>
                               <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
                                   <Text style={txtName}>{recipes.name}</Text>
@@ -57,30 +58,16 @@ export default class ShoppingList extends Component {
                                       <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
                                   </TouchableOpacity>
                               </View>
-                              <View>
-                                  <Text style={txtPrice}> $$ </Text>
-                              </View>
-
-                                   <View style={numberOfProduct}>
-                                   <TouchableOpacity onPress={() => this.decrRecipe(recipes.name)}>
-                                       <Text style = {textStyle}>-</Text>
-                                   </TouchableOpacity>
-                                       <Text style ={textStyle}> {recipes.number_of_servings} </Text>
-                                       <TouchableOpacity onPress={() => this.incrRecipe(recipes.name)}>
-                                           <Text style={textStyle}>+</Text>
-                                       </TouchableOpacity>
-                                   </View>
-
+                          <View style={numberOfProduct}>
+                              <Text style={txtPrice}> {recipes.price*recipes.number_of_servings}$ </Text>
+                              <Text style ={textStyle}> -   {recipes.number_of_servings} Servings </Text>
+                           </View>
                           </View>
                       </View>
-
-
         )
       )}
-      <TouchableOpacity
-     onPress={()=>{this.props.navigation.navigate('Oder')}}
-      >
-      <Text> Buy Now </Text>
+      <TouchableOpacity style={buynowButton}  onPress={()=>{this.props.navigation.navigate('Oder')}}>
+       <Text style={buynowTitle}>Total {total}$ Buy now </Text>
       </TouchableOpacity>
       <View style={wrapper_}>
       </View>
@@ -125,7 +112,7 @@ textStyle: {
   fontSize:16,
   color: '#95989A',
   justifyContent:'center',
-  letterSpacing: 4,
+
 },
 textStyle_: {
   fontSize:14,
@@ -143,7 +130,7 @@ textStyleReset:{
   color: 'white',
   fontSize: 15
 },
-productStyle: {
+recipeStyle: {
        flexDirection: 'row',
        margin: 10,
        padding: 10,
@@ -153,7 +140,20 @@ productStyle: {
        shadowOffset: { width: 0, height: 3 },
        shadowOpacity: 0.2
    },
-   productImage: {
+   buynowButton: {
+           height: 50,
+           margin: 20,
+           backgroundColor: '#FFC0CB',
+           borderRadius: 2,
+           alignItems: 'center',
+           justifyContent: 'center'
+       },
+  buynowTitle: {
+      color: '#FFF',
+      fontSize: 16,
+
+  },
+   recipeImage: {
        width: 30,
        height: 60,
        flex: 1,
@@ -163,34 +163,29 @@ productStyle: {
        flex: 3,
        justifyContent: 'space-between'
    },
-   productController: {
+   recipeController: {
        flexDirection: 'row'
    },
    numberOfProduct: {
        flex: 1,
        flexDirection: 'row',
-       justifyContent: 'space-around'
+       justifyContent: 'flex-end',
+       marginTop: 10,
    },
    txtName: {
+       paddingLeft: 20,
+       fontSize: 16,
+       fontWeight: '400',
+
+   },
+   txtPrice: {
        paddingLeft: 20,
        color: '#A7A7A7',
        fontSize: 16,
        fontWeight: '400',
-       fontFamily: 'Avenir'
-   },
-   txtPrice: {
-       paddingLeft: 20,
-       color: '#C21C70',
-       fontSize: 16,
-       fontWeight: '400',
-       fontFamily: 'Avenir'
-   },
-   numberOfProduct: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
 
-    },
+   },
+
 
 
 });

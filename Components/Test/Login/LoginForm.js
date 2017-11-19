@@ -107,7 +107,7 @@ paddingBottom: 200
     borderRadius :6,
     backgroundColor:'#E1E1E1',
     marginBottom: 10,
-    color: '#FFFFFF',
+    color: '#95989A',
     paddingHorizontal: 10,
   },
   buttonContainer: {

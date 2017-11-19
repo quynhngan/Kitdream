@@ -6,6 +6,8 @@ import food from "/Users/quynhngan/KitDream/image/food.jpg";
 import food_2 from "/Users/quynhngan/KitDream/image/food_2.jpg";
 import food_3 from "/Users/quynhngan/KitDream/image/food_3.jpg";
 import chef_3 from "/Users/quynhngan/KitDream/image/chef_3.png";
+import like_1 from "/Users/quynhngan/KitDream/image/like_1.png";
+import like_2 from "/Users/quynhngan/KitDream/image/like_2.png";
 import global from '/Users/quynhngan/KitDream/Components/Test/global.js'
 
 const {height,width} = Dimensions.get('window');
@@ -55,6 +57,7 @@ export default class Recipe extends Component{
         console.error(error);
       });
   }
+
   render(){
     if (this.state.isLoading) {
       return (
@@ -64,7 +67,10 @@ export default class Recipe extends Component{
       );
     }
 
-    const {wrapper,nameStyle,imageStyle,_wrapper,iconStyle,textStyle} = styles;
+    const {wrapper,nameStyle,imageStyle,_wrapper,iconStyle,textStyle,nameWrapper,imageIcon} = styles;
+
+     let imageLike = <Image style={imageIcon } source={ like_2 }
+   /> ;
     return(
       <ScrollView style = {{flex:1, backgroundColor:'#FFF6F7'}}>
       <View style={{height:height/10}}>
@@ -92,8 +98,12 @@ export default class Recipe extends Component{
             <Image source ={{url:recipes.image_url}} style={imageStyle}/>
             </TouchableOpacity>
             </View>
-            <View style = {{flex:1}}>
+            <View style = {nameWrapper}>
             <Text style ={nameStyle}> {recipes.name.toUpperCase()} </Text>
+            <TouchableOpacity
+            onPress={ () => imageLike.source = {like_1} }>
+           {imageLike}
+            </TouchableOpacity>
             </View>
           </View>
 
@@ -115,15 +125,27 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5
   },
   nameStyle: {
-    paddingTop: 15,
+    paddingBottom: 15,
     paddingLeft: 15,
     fontSize:14,
     color: '#95989A',
     justifyContent:'center',
   },
+  nameWrapper: {
+
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   imageStyle: {
     height: imageHeight,
     width: imageWidth,
+  },
+  imageIcon:{
+    width:20,
+    height: 20,
+    marginRight:15,
+    paddingTop:20,
+
   },
    _wrapper: {
       height: height/10,
