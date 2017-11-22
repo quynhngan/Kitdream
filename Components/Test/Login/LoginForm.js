@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import {  View,  Text,  StyleSheet,TextInput, TouchableOpacity,Image, Alert} from 'react-native'
+import global from '/Users/quynhngan/KitDream/Components/Test/global.js'
 import saveUser from '/Users/quynhngan/KitDream/Components/Test/Login/saveUser.js'
 export default class LoginForm extends Component {
 static navigationOptions = {header:null}
@@ -30,8 +31,11 @@ signIn() {
     if (responseJson.errors) {
       this.alertError()
     } else {
+      global.currentUser = responseJson;
       saveUser(responseJson)
-      .then(user => this.setState({user}))
+      .then(user => {
+        this.setState({user})
+      })
       .catch((error) => {
         console.error(error);
       })
@@ -43,6 +47,7 @@ signIn() {
 )
 
 }
+
 alertError(){
   Alert.alert(
     'Notice',

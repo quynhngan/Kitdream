@@ -49,10 +49,12 @@ export default class Header extends Component {
       <Image source = {profile} style ={logoProfile}/>
       </View>
       <View style={wrapperName}>
-      <Text style = {textStyle}>Nguyen Quynh Ngan </Text>
+      <Text style = {textStyle}>{user.full_name} </Text>
       </View>
         <View style={a}>
-      <TouchableOpacity style = {buttonContainer}>
+      <TouchableOpacity style = {buttonContainer}
+      onPress={()=>this.props.navigation.navigate('OrderHistory')}
+      >
       <Text style ={buttonText}> Order History </Text>
       </TouchableOpacity>
       <TouchableOpacity style = {buttonContainer}

@@ -8,4 +8,6 @@ module.exports ={
   removeRecipe: null,
   incrRecipe: null,
   decrRecipe: null,
+  currentUser: null,
+  total: null,
 };

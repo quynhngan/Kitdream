@@ -32,7 +32,7 @@ export default class ShoppingList extends Component {
     const {wrapper,iconStyle,_wrapper,buynowButton,buynowTitle,textStyle,_textStyle,textStyleReset,wrapper_,recipeImage,mainRight,txtName,txtPrice,recipeStyle,numberOfProduct} = styles;
     const cart = this.props.screenProps || []
     const arrTotal = cart.map(recipes => recipes.price * recipes.number_of_servings);
-       const total = arrTotal.length ? arrTotal.reduce((a, b) => a + b) : 0;
+      total = arrTotal.length ? arrTotal.reduce((a, b) => a + b) : 0;
     return (
       <View>
       <View style={{height:height/10}}>
@@ -66,7 +66,7 @@ export default class ShoppingList extends Component {
                       </View>
         )
       )}
-      <TouchableOpacity style={buynowButton}  onPress={()=>{this.props.navigation.navigate('Oder')}}>
+      <TouchableOpacity style={buynowButton}  onPress={()=>{this.props.navigation.navigate('Order',{total})}}>
        <Text style={buynowTitle}>Total {total}$ Buy now </Text>
       </TouchableOpacity>
       <View style={wrapper_}>

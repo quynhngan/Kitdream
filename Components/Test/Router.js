@@ -8,8 +8,9 @@ import ProfileDetail from '/Users/quynhngan/KitDream/Components/Test/Login/Profi
 import Search from '/Users/quynhngan/KitDream/Components/Test/Search/Search.js';
 import FilterRecipe from '/Users/quynhngan/KitDream/Components/Test/Recipe/FilterRecipe.js';
 import ShoppingList from '/Users/quynhngan/KitDream/Components/Test/Shopping/ShoppingList.js';
-import Oder from '/Users/quynhngan/KitDream/Components/Test/Shopping/Oder.js';
+import Order from '/Users/quynhngan/KitDream/Components/Test/Shopping/Order.js';
 import Contact from '/Users/quynhngan/KitDream/Components/Test/Login/Contact.js'
+import OrderHistory from '/Users/quynhngan/KitDream/Components/Test/Login/OrderHistory.js'
 
 
  export const HomeStack = StackNavigator({
@@ -37,6 +38,9 @@ export const ProfileStack = StackNavigator({
   Contact:{
     screen: Contact,
   },
+  OrderHistory:{
+    screen: OrderHistory,
+  }
 });
 /*export const FilterStack = StackNavigator({
   Search: {
@@ -50,7 +54,7 @@ export const ShoppingStack = StackNavigator({
   ShoppingList: {
     screen: ShoppingList,
   },
-  Oder:{
-    screen: Oder,
+  Order:{
+    screen: Order,
   },
 });

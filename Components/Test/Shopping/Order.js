@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  View,Text,  StyleSheet,Dimensions,Image,TextInput,TouchableOpacity} from 'react-native';
+import {  View,Text,  StyleSheet,Dimensions,Image,TextInput,TouchableOpacity,Alert} from 'react-native';
 import chef_3 from "/Users/quynhngan/KitDream/image/chef_3.png";
 import global from '/Users/quynhngan/KitDream/Components/Test/global.js';
 export default class Oder extends Component {
@@ -14,10 +14,42 @@ constructor(props) {
     phone:"",
   }
 }
+sendOrder() {
+  return fetch('http://localhost:4000/orders', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ order: {
+    address: this.state.address,
+    full_name: this.state.name,
+    phone_number: this.state.phone,
+    status: this.state.status = "pending",
+    price: this.state.price = this.props.navigation.state.params.total,
+  }})
+})
+.then((response) => response.json())
+.then((responseJson) => {
+  this.alertSusscess()
+    this.props.navigation.navigate('ShoppingList')
+  }
+)
+.catch((error) => {
+this.alertError()
+});
+
+}
 alertError(){
   Alert.alert(
     'Notice',
-    'email or password is incorrect',
+    {cancelable: false}
+  );
+}
+alertSusscess(){
+  Alert.alert(
+    'Notice',
+    'Susscessfully!',
     [
       {text: 'OK',onPress:()=>console.log('Ask me later pressed')}
     ],
@@ -27,7 +59,7 @@ alertError(){
   render() {
     return (
       <View style={styles.a}>
-<View style = { styles.formContainer}>
+      <View style = { styles.formContainer}>
       <View style={styles.container}>
       <Text style = {styles.textStyle}> Name </Text>
       <TextInput style = { styles.input}
@@ -56,8 +88,9 @@ alertError(){
       autoCapitalize='none'
       keyboardType= 'phone-pad'
       />
-      <TouchableOpacity style = {styles.buttonContainer}
 
+      <TouchableOpacity style = {styles.buttonContainer}
+       onPress={this.sendOrder.bind(this)}
       >
       <Text style ={styles.buttonText}> Send Order </Text>
       </TouchableOpacity>

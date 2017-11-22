@@ -20,7 +20,7 @@ import Recipe from "./Components/Test/Recipe/Recipe"
 import Search from "./Components/Test/Search/Search"
 import HomeScreen from "./Components/Test/HomeScreen"
 import LoginForm from "./Components/Test/Login/LoginForm"
-import Oder from "/Users/quynhngan/KitDream/Components/Test/Shopping/Oder.js";
+import OrderHistory from "/Users/quynhngan/KitDream/Components/Test/Login/OrderHistory.js";
 console.disableYellowBox = true;
 export default class KitDream extends Component {
   render() {
@@ -28,7 +28,7 @@ export default class KitDream extends Component {
     <View>
 <Tabbar/>
 <ProfileDetail/>
-<Contact/>
+<OrderHistory/>
     </View>
 
 
